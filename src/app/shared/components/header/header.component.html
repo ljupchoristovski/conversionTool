@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+    <span class="header-content">
+        <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger"
+            (click)="menuTrigger.openMenu()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" [overlapTrigger]="false">
+            <span (mouseleave)="menuTrigger.closeMenu()">
+                <button mat-menu-item [routerLink]="['/currency']">
+                    <mat-icon>money</mat-icon>
+                    <span>Currency converter</span>
+                </button>
+                <button mat-menu-item [routerLink]="['/length']">
+                    <mat-icon>all_inclusive</mat-icon>
+                    <span>Length converter</span>
+                </button>
+            </span>
+        </mat-menu>
+    </span>
+    <span class="header-content">Converter Tool</span>
+</mat-toolbar>

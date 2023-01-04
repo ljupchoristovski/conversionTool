@@ -1,0 +1,45 @@
+<div class="converter">
+    <form [formGroup]="currencyForm" (ngSubmit)="calculate()">
+        <mat-form-field>
+            <mat-label>Amount</mat-label>
+            <input matInput type="number" formControlName="amount" id="amount">
+        </mat-form-field>
+        <form-drop-down label="From" key="fromValue" [options]="currencies" optionsKey="name" optionsValue="name"
+            [form]="currencyForm"></form-drop-down>
+        <button mat-icon-button (click)="switchType()">
+            <mat-icon>compare_arrows</mat-icon>
+        </button>
+        <form-drop-down label="To" key="toValue" [options]="currencies" optionsKey="name" optionsValue="name"
+            [form]="currencyForm"></form-drop-down>
+        <button type="submit" mat-raised-button color="primary" [disabled]="currencyForm.invalid">Convert</button>
+    </form>
+    <div class="result">
+        <h2 *ngIf="result | async as res">
+            Result: {{res.result | currency:currencyForm.controls['toValue'].value:'symbol'}}
+        </h2>
+        <div>
+            <button mat-raised-button color="primary" (click)="showHistory()">Show history</button>
+        </div>
+        <div *ngIf="dataSource.data.length > 0">
+            <h4>Based on USD currency</h4>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef> Type </th>
+                    <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="value">
+                    <th mat-header-cell *matHeaderCellDef> Value </th>
+                    <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

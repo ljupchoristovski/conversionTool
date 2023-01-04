@@ -1,0 +1,10 @@
+<div [formGroup]="form">
+    <mat-form-field appearance="fill">
+        <mat-label *ngIf="label" for="`${label}`">{{ label }}</mat-label>
+        <mat-select [formControlName]="key">
+            <mat-option *ngFor="let option of options" [value]="option[optionsKey]">
+                {{ option[optionsValue] }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

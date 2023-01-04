@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.converter {
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin: 1rem;
+        align-items: baseline;
+    }
+
+    .result {
+        margin: 20px;
+
+        h2 {
+            margin: 20px 0;
+        }
+
+        button {
+            margin-bottom: 20px;
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    form {
+        flex-direction: column;
+        align-items: center !important;
+    }
+
+    .result {
+        text-align: center;
+    }
+}

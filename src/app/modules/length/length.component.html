@@ -1,0 +1,33 @@
+<div class="converter">
+    <form [formGroup]="lengthForm" (ngSubmit)="calculate()">
+        <mat-form-field>
+            <mat-label>Amount</mat-label>
+            <input matInput type="number" formControlName="amount" id="amount">
+        </mat-form-field>
+        <form-drop-down
+            label="From"
+            key="fromValue"
+            [options]="lengths"
+            optionsKey="id"
+            optionsValue="name"
+            [form]="lengthForm"
+        ></form-drop-down>
+        <button mat-icon-button (click)="switchType()">
+            <mat-icon>compare_arrows</mat-icon>
+        </button>
+        <form-drop-down
+            label="To"
+            key="toValue"
+            [options]="lengths"
+            optionsKey="id"
+            optionsValue="name"
+            [form]="lengthForm"
+        ></form-drop-down>
+        <button mat-raised-button color="primary" [disabled]="lengthForm.invalid">Convert</button>
+    </form>
+    <div class="result">
+        <h2 *ngIf="result">
+            Result: {{result}} {{lengthForm.controls['toValue'].value}}
+        </h2>
+    </div>
+</div>
