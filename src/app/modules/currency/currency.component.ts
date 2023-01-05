@@ -6,7 +6,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Observable } from 'rxjs';
 import { DataService } from 'src/app/shared/services/data.service';
 import { Currency } from './currency.model';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-currency',
   templateUrl: './currency.component.html',
@@ -86,7 +88,7 @@ export class CurrencyComponent implements OnInit {
 
   showHistory(): void {
     const currentDate = formatDate(new Date(), 'YYYY-MM-dd', 'en-US');
-    this.dataService.getHistory(currentDate).subscribe(res => {
+    this.dataService.getHistory(currentDate).pipe(untilDestroyed(this)).subscribe(res => {
       this.dataSource.data = res;
 
       // because of the condition of dataSource before showing the table
